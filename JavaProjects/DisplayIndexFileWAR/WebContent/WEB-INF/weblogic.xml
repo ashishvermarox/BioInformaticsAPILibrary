@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<weblogic-web-app xmlns="http://www.bea.com/ns/weblogic/90">
+
+<container-descriptor>
+<index-directory-enabled>true</index-directory-enabled>
+</container-descriptor>
+
+<virtual-directory-mapping>
+     <local-path>C:\University\AlgoInBio\Project</local-path>
+     <url-pattern>FolderZone/*</url-pattern>
+</virtual-directory-mapping>
+  
+<virtual-directory-mapping>
+     <local-path>C:\University\AlgoInBio\Project</local-path>
+     <url-pattern>Html_Utilities/*</url-pattern>
+</virtual-directory-mapping>
+
+<context-root>/uOttawa-Bioinformatics</context-root>
+
+</weblogic-web-app>
