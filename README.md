@@ -1,2 +1,2 @@
 # BioInformaticsAPILibrary
-Library to host APIs in the field of Bioinformatics
+Library to host Bioinformatics APIs 
