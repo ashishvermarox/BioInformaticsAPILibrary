@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+    <con:coreEntry>
+        <con:binding type="Native REST" xsi:type="con:NativeRestBindingType"/>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline type="request" name="request-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7fef">
+            <con:stage id="_StageId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7fed" name="GetParams">
+                <con:context/>
+                <con:actions>
+                    <con1:assign varName="uid" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7fb8</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>fn:string($inbound/ctx:transport/ctx:request/http:query-parameters/http:parameter[@name='usersession']/@value)</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="status" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7fb6</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>fn:string($inbound/ctx:transport/ctx:request/http:query-parameters/http:parameter[@name='status']/@value)</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7fb5" name="LoadProperties">
+                <con:context/>
+                <con:actions>
+                    <con1:assign varName="Properties" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7f81</con2:id>
+                        <con1:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="Project_uOttawa/Resources/PropertyFiles/Property"/>
+                            </con2:xqueryTransform>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="completedFilePath" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7f7e</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$Properties/Folderproperties/ArchiveZoneOutput/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="processingFilePath" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7f7b</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$Properties/Folderproperties/ProcessZone/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="viewProcessingLink">
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7e1c</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$Properties/ExternalServiceLinks/ViewProcessing/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="refreshRate">
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7e16</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$Properties/ExternalServiceLinks/RefreshInterval/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="displayResultURL">
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7e04</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$Properties/ExternalServiceLinks/DisplayResult/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="processText">
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7e01</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$Properties/ExternalServiceLinks/ProcessingStatusText/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="htmlresource">
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7dcc</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$Properties/ExternalServiceLinks/HTMLResource/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="statuscomplete" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57ff59.3eb313c0.0.16774e860b4.N7ddf</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$Properties/ExternalServiceLinks/ResultViewStatusComplete/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="statusprocessing" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57ff59.3eb313c0.0.16774e860b4.N7ddc</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$Properties/ExternalServiceLinks/ResultViewStatusProcessing/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7f7a" name="ProcessSearch">
+                <con:context/>
+                <con:actions>
+                    <con1:javaCallout varName="result">
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7e10</con2:id>
+                        <con1:archive ref="Project_uOttawa/Resources/JARs/ResultStatusListFiles"/>
+                        <con1:className>com.uottawa.bioinformatics.resusable.listfiles.ListFiles</con1:className>
+                        <con1:method>public static java.lang.String listFiles(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)</con1:method>
+                        <con1:expr>
+                            <con2:xqueryText>$processingFilePath</con2:xqueryText>
+                        </con1:expr>
+                        <con1:expr>
+                            <con2:xqueryText>$completedFilePath</con2:xqueryText>
+                        </con1:expr>
+                        <con1:expr>
+                            <con2:xqueryText>$uid</con2:xqueryText>
+                        </con1:expr>
+                        <con1:expr>
+                            <con2:xqueryText>$status</con2:xqueryText>
+                        </con1:expr>
+                        <con1:expr>
+                            <con2:xqueryText>$displayResultURL</con2:xqueryText>
+                        </con1:expr>
+                        <con1:expr>
+                            <con2:xqueryText>$processText</con2:xqueryText>
+                        </con1:expr>
+                        <con1:return-param-as-ref>false</con1:return-param-as-ref>
+                    </con1:javaCallout>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7fee">
+            <con:stage id="_StageId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7f32" name="RefreshContent">
+                <con:context/>
+                <con:actions>
+                    <con1:ifThenElse>
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7ebb</con2:id>
+                        <con1:case id="_BranchId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7eba">
+                            <con1:condition>
+                                <con2:xqueryConditionExpr>
+                                    <con2:compExpr operator="=">
+                                        <con2:leftPath>$status</con2:leftPath>
+                                        <con2:rightPath>$statuscomplete</con2:rightPath>
+                                    </con2:compExpr>
+                                </con2:xqueryConditionExpr>
+                            </con1:condition>
+                            <con1:actions>
+                                <con1:assign varName="refreshContent">
+                                    <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7e22</con2:id>
+                                    <con1:expr>
+                                        <con2:xqueryText>''</con2:xqueryText>
+                                    </con1:expr>
+                                </con1:assign>
+                                <con1:assign varName="htmlOutput" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                                    <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7dc9</con2:id>
+                                    <con1:expr>
+                                        <con2:xqueryText><![CDATA[<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{fn:concat($htmlresource, 'css/Style.css')}"></link>
+		<title>Processing View :: BioInformatics API Library || University of Ottawa</title>
+	</head>
+
+	<body>
+		<div class="maincontainer">
+			<div class ="heading">
+				BioInformatics API Library
+			</div>
+			<div class = "subtitleText">
+				Current Status
+			</div>
+			
+			<div class="displayProcessingResult">
+				<table align="center">
+					<tr>
+						<th>API Name</th>
+						<th>Status</th>
+					</tr>
+					{xs:string($result)}
+				</table>
+			</div>		
+		</div>
+	</body>
+	
+</html>]]></con2:xqueryText>
+                                    </con1:expr>
+                                </con1:assign>
+                            </con1:actions>
+                        </con1:case>
+                        <con1:default>
+                            <con1:ifThenElse>
+                                <con2:id>_ActionId-N3f57ff59.3eb313c0.0.16774e860b4.N7f3e</con2:id>
+                                <con1:case id="_BranchId-N3f57ff59.3eb313c0.0.16774e860b4.N7f3d">
+                                    <con1:condition>
+                                        <con2:xqueryText>fn:contains($result,$processText)</con2:xqueryText>
+                                    </con1:condition>
+                                    <con1:actions>
+                                        <con1:assign varName="fileDestPath" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                                            <con2:id>_ActionId-N3f57ff59.3eb313c0.0.16774e860b4.N7f09</con2:id>
+                                            <con1:expr>
+                                                <con2:xqueryText>$Properties/Folderproperties/ArchiveZoneOutput/text()</con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:assign>
+                                        <con1:javaCallout varName="moveFlag">
+                                            <con2:id>_ActionId-N3f57ff59.Nf370eaf.0.167762bd684.N7fc4</con2:id>
+                                            <con1:archive ref="Project_uOttawa/Resources/JARs/ResultStatusListFiles"/>
+                                            <con1:className>com.uottawa.bioinformatics.resusable.listfiles.ListFiles</con1:className>
+                                            <con1:method>public static boolean moveFiles(java.lang.String, java.lang.String, java.lang.String)</con1:method>
+                                            <con1:expr>
+                                                <con2:xqueryText>$processingFilePath</con2:xqueryText>
+                                            </con1:expr>
+                                            <con1:expr>
+                                                <con2:xqueryText>$fileDestPath</con2:xqueryText>
+                                            </con1:expr>
+                                            <con1:expr>
+                                                <con2:xqueryText>$uid</con2:xqueryText>
+                                            </con1:expr>
+                                            <con1:return-param-as-ref>false</con1:return-param-as-ref>
+                                        </con1:javaCallout>
+                                        <con1:ifThenElse xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                                            <con2:id>_ActionId-N3f57ff59.3eb313c0.0.16774e860b4.N7ec7</con2:id>
+                                            <con1:case id="_BranchId-N3f57ff59.3eb313c0.0.16774e860b4.N7ec6">
+                                                <con1:condition>
+                                                    <con2:xqueryConditionExpr>
+                                                        <con2:compExpr operator="=">
+                                                            <con2:leftPath>fn:boolean($moveFlag)</con2:leftPath>
+                                                            <con2:rightPath>fn:true()</con2:rightPath>
+                                                        </con2:compExpr>
+                                                    </con2:xqueryConditionExpr>
+                                                </con1:condition>
+                                                <con1:actions>
+                                                    <con1:assign varName="status">
+                                                        <con2:id>_ActionId-N3f57ff59.3eb313c0.0.16774e860b4.N7ec5</con2:id>
+                                                        <con1:expr>
+                                                            <con2:xqueryText>$Properties/ExternalServiceLinks/ResultViewStatusComplete/text()</con2:xqueryText>
+                                                        </con1:expr>
+                                                    </con1:assign>
+                                                </con1:actions>
+                                            </con1:case>
+                                            <con1:default>
+                                                <con1:assign varName="status">
+                                                    <con2:id>_ActionId-N3f57ff59.3eb313c0.0.16774e860b4.N7ec4</con2:id>
+                                                    <con1:expr>
+                                                        <con2:xqueryText>$Properties/ExternalServiceLinks/ResultViewStatusProcessing/text()</con2:xqueryText>
+                                                    </con1:expr>
+                                                </con1:assign>
+                                            </con1:default>
+                                        </con1:ifThenElse>
+                                        <con1:assign varName="params">
+                                            <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7e1f</con2:id>
+                                            <con1:expr>
+                                                <con2:xqueryText>fn:concat('usersession=', $uid, '&amp;#38;', 'status=', $status)</con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:assign>
+                                        <con1:assign varName="refreshURL">
+                                            <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7dc6</con2:id>
+                                            <con1:expr>
+                                                <con2:xqueryText>fn:concat($viewProcessingLink, $params)</con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:assign>
+                                        <con1:assign varName="htmlOutput" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                                            <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7dc3</con2:id>
+                                            <con1:expr>
+                                                <con2:xqueryText><![CDATA[<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{fn:concat($htmlresource, 'css/Style.css')}"></link>
+		<title>Processing View :: BioInformatics API Library || University of Ottawa</title>
+		<meta http-equiv="refresh" content="{$refreshRate}; url={$refreshURL}"></meta>
+	</head>
+
+	<body>
+		<div class="maincontainer">
+			<div class ="heading">
+				BioInformatics API Library
+			</div>
+			<div class = "subtitleText">
+				Current Status
+			</div>
+			
+			<div class="displayProcessingResult">
+				<table align="center">
+					<tr>
+						<th>API Name</th>
+						<th>Status</th>
+					</tr>
+					{xs:string($result)}
+				</table>
+			</div>		
+		</div>
+	</body>	
+</html>]]></con2:xqueryText>
+                                            </con1:expr>
+                                        </con1:assign>
+                                    </con1:actions>
+                                </con1:case>
+                                <con1:default>
+                                    <con1:ifThenElse>
+                                        <con2:id>_ActionId-N3f57ff59.N1b15958e.0.16778a8cd69.N7ffa</con2:id>
+                                        <con1:case id="_BranchId-N3f57ff59.N1b15958e.0.16778a8cd69.N7ff9">
+                                            <con1:condition>
+                                                <con2:xqueryConditionExpr>
+                                                    <con2:compExpr operator="=">
+                                                        <con2:leftPath>$result</con2:leftPath>
+                                                        <con2:rightPath>''</con2:rightPath>
+                                                    </con2:compExpr>
+                                                </con2:xqueryConditionExpr>
+                                            </con1:condition>
+                                            <con1:actions>
+                                                <con1:assign varName="params">
+                                                    <con2:id>_ActionId-N3f57ff59.152a4943.0.167781fe2b8.N7eeb</con2:id>
+                                                    <con1:expr>
+                                                        <con2:xqueryText>fn:concat('usersession=', $uid, '&amp;#38;', 'status=', $status)</con2:xqueryText>
+                                                    </con1:expr>
+                                                </con1:assign>
+                                                <con1:assign varName="refreshURL">
+                                                    <con2:id>_ActionId-N3f57ff59.152a4943.0.167781fe2b8.N7ee8</con2:id>
+                                                    <con1:expr>
+                                                        <con2:xqueryText>fn:concat($viewProcessingLink, $params)</con2:xqueryText>
+                                                    </con1:expr>
+                                                </con1:assign>
+                                                <con1:assign varName="htmlOutput" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                                                    <con2:id>_ActionId-N3f57ff59.N1b15958e.0.16778a8cd69.N7f89</con2:id>
+                                                    <con1:expr>
+                                                        <con2:xqueryText><![CDATA[<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{fn:concat($htmlresource, 'css/Style.css')}"></link>
+		<title>Processing View :: BioInformatics API Library || University of Ottawa</title>
+		<meta http-equiv="refresh" content="{$refreshRate}; url={$refreshURL}"></meta>
+	</head>
+
+	<body>
+		<div class="maincontainer">
+			<div class ="heading">
+				BioInformatics API Library
+			</div>
+			<div class = "subtitleText">
+				Current Status
+			</div>
+			
+			<div class="displayProcessingResult">
+				<table align="center">
+					<tr>
+						<th>API Name</th>
+						<th>Status</th>
+					</tr>
+					<tr>
+						<td>{$uid}</td>
+						<td>Processing...</td>
+					</tr>
+				</table>
+			</div>		
+		</div>
+	</body>	
+</html>]]></con2:xqueryText>
+                                                    </con1:expr>
+                                                </con1:assign>
+                                            </con1:actions>
+                                        </con1:case>
+                                        <con1:default>
+                                            <con1:assign varName="params">
+                                                <con2:id>_ActionId-N3f57ff59.N1b15958e.0.16778a8cd69.N7f90</con2:id>
+                                                <con1:expr>
+                                                    <con2:xqueryText>fn:concat('usersession=', $uid, '&amp;#38;', 'status=', $status)</con2:xqueryText>
+                                                </con1:expr>
+                                            </con1:assign>
+                                            <con1:assign varName="refreshURL">
+                                                <con2:id>_ActionId-N3f57ff59.N1b15958e.0.16778a8cd69.N7f8d</con2:id>
+                                                <con1:expr>
+                                                    <con2:xqueryText>fn:concat($viewProcessingLink, $params)</con2:xqueryText>
+                                                </con1:expr>
+                                            </con1:assign>
+                                            <con1:assign varName="htmlOutput" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                                                <con2:id>_ActionId-N3f57ff59.152a4943.0.167781fe2b8.N7ee5</con2:id>
+                                                <con1:expr>
+                                                    <con2:xqueryText><![CDATA[<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{fn:concat($htmlresource, 'css/Style.css')}"></link>
+		<title>Processing View :: BioInformatics API Library || University of Ottawa</title>
+		<meta http-equiv="refresh" content="{$refreshRate}; url={$refreshURL}"></meta>
+	</head>
+
+	<body>
+		<div class="maincontainer">
+			<div class ="heading">
+				BioInformatics API Library
+			</div>
+			<div class = "subtitleText">
+				Current Status
+			</div>
+			
+			<div class="displayProcessingResult">
+				<table align="center">
+					<tr>
+						<th>API Name</th>
+						<th>Status</th>
+					</tr>
+					{$result}
+				</table>
+			</div>		
+		</div>
+	</body>	
+</html>]]></con2:xqueryText>
+                                                </con1:expr>
+                                            </con1:assign>
+                                        </con1:default>
+                                    </con1:ifThenElse>
+                                </con1:default>
+                            </con1:ifThenElse>
+                        </con1:default>
+                    </con1:ifThenElse>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7fec" name="ResponseOutput">
+                <con:context/>
+                <con:actions>
+                    <con1:transport-headers xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7f36</con2:id>
+                        <con1:header-set>inbound-response</con1:header-set>
+                        <con1:header value="expression" name="Content-Type">
+                            <con2:xqueryText>'text/html'</con2:xqueryText>
+                        </con1:header>
+                    </con1:transport-headers>
+                    <con1:replace varName="body" contents-only="true" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+                        <con2:id>_ActionId-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7f33</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>$htmlOutput</con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Pipeline Pair Node1">
+                <con:request>request-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7fef</con:request>
+                <con:response>response-N3f57ff59.N237d4b61.0.1676e4d9a2f.N7fee</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

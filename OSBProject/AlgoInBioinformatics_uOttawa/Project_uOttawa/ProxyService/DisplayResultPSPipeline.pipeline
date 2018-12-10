@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+    <con:coreEntry>
+        <con:binding type="Native REST" xsi:type="con:NativeRestBindingType"/>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline type="request" name="request-N3f57ff59.N8c3f467.0.1674a8027eb.N8000">
+            <con:stage id="_StageId-N3f57ff59.N8c3f467.0.1674a8027eb.N7ffe" name="GetFileName">
+                <con:context/>
+                <con:actions>
+                    <con1:assign varName="filename">
+                        <con2:id>_ActionId-N3f57ff59.N8c3f467.0.1674a8027eb.N7ffa</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>fn:string($inbound/ctx:transport/ctx:request/http:query-parameters/http:parameter[@name='file']/@value)</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="Properties">
+                        <con2:id>_ActionId-N3f57ff59.N8c3f467.0.1674a8027eb.N7fe4</con2:id>
+                        <con1:expr>
+                            <con2:xqueryTransform>
+                                <con2:resource ref="Project_uOttawa/Resources/PropertyFiles/Property"/>
+                            </con2:xqueryTransform>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="filepath">
+                        <con2:id>_ActionId-N3f57ff59.N8c3f467.0.1674a8027eb.N7fe1</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$Properties/Folderproperties/HttpPath/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="htmlresource">
+                        <con2:id>_ActionId-N3f57ff59.N591157d8.0.1674f4f186d.N7ffe</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$Properties/ExternalServiceLinks/HTMLResource/text()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="displayFile">
+                        <con2:id>_ActionId-N3f57ff59.N8c3f467.0.1674a8027eb.N7fdb</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>fn:concat($filepath, $filename)</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57ff59.N8c3f467.0.1674a8027eb.N7fff">
+            <con:stage id="_StageId-N3f57ff59.N8c3f467.0.1674a8027eb.N7ffd" name="ResponseHTML">
+                <con:context/>
+                <con:actions>
+                    <con1:assign varName="htmlOutput">
+                        <con2:id>_ActionId-N3f57ff59.N8c3f467.0.1674a8027eb.N7ff4</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText><![CDATA[<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{fn:concat($htmlresource, 'css/Style.css')}"></link>
+		<title>Result :: BioInformatics API Library || University of Ottawa</title>
+	</head>
+
+	<body>
+		<div class="maincontainer">
+			<div class ="heading">
+				BioInformatics API Library
+			</div>
+			<div class = "subtitleText">
+				Result View
+			</div>
+			
+			<div class="download">
+				<a href="{$displayFile}" class="APIButton" download="result">Download Result</a>
+			</div>
+			
+			<div class="frameView">
+				<iframe src="{$displayFile}" frameborder="0" height="430" width="1024"></iframe>
+			</div>		
+		</div>
+	</body>
+</html>]]></con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:transport-headers>
+                        <con2:id>_ActionId-N3f57ff59.N8c3f467.0.1674a8027eb.N7ff7</con2:id>
+                        <con1:header-set>inbound-response</con1:header-set>
+                        <con1:header value="expression" name="Content-Type">
+                            <con2:xqueryText>'text/html'</con2:xqueryText>
+                        </con1:header>
+                    </con1:transport-headers>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N3f57ff59.N8c3f467.0.1674a8027eb.N7ff1</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>$htmlOutput</con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="Pipeline Pair Node1">
+                <con:request>request-N3f57ff59.N8c3f467.0.1674a8027eb.N8000</con:request>
+                <con:response>response-N3f57ff59.N8c3f467.0.1674a8027eb.N7fff</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>
