@@ -1,0 +1,9 @@
+>DNA Sequence
+TAAAATTAAAATTAAAATA
+
+SSR Found 
+SSR String : TAAAAT
+SSR Repeats : 2
+SSR Starting Index : 0
+----------------------------------------- 
+
