@@ -1,6 +1,6 @@
 <Properties>
 	
-	<!-- These properties are used to while writing to below folder, each folder in service specific, all paths must end with '/'-->
+	<!-- These properties are used while writing to below folders, each folder is service specific, all paths must end with '/'-->
 	
 	<ServiceName>Kmer_SSR</ServiceName> <!-- dont use '-' here -->
         
