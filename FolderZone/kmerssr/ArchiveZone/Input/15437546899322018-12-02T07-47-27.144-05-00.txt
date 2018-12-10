@@ -1,0 +1,7 @@
+SessID :1543754689932
+DNA String :TAAAATTAAAATTAAAATA
+Min Search :2
+Max Search :5
+Min Repeat :3
+User Name :Ashish Verma
+Email ID :ashish_verma@live.com

@@ -1,0 +1,1 @@
+inpVar1 added word value2

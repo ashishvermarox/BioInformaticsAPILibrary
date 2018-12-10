@@ -1,0 +1,10 @@
+>DNA Sequence
+TAAAATTAAAATTAAAATAATTAAA
+
+SSR String : TAAAAT
+SSR Period Size : 6
+SSR Repeats : 3
+SSR Starting Index : 0
+SSR Ending Index : 17
+----------------------------------------- 
+

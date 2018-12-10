@@ -1,0 +1,4 @@
+>DNA Sequence
+TAAAATTAAAATTAAAATA
+
+No SSR found

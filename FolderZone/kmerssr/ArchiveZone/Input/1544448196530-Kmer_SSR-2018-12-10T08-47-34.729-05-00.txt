@@ -1,0 +1,7 @@
+SessID :1544448196530
+DNA String :TAAAATTAAAATTAAAATAAAAAA
+Min Search :2
+Max Search :6
+Min Repeat :2
+User Name :Ashish
+Email ID :abc_xyz@zz.com
