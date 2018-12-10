@@ -1,0 +1,42 @@
+<html>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="../css/Style.css"></link>
+		<title>Kmer-SSR :: BioInformatics API Library || University of Ottawa</title>
+	</head>
+
+	<body>
+		<div class="maincontainer">
+			<div class ="heading">
+				Kmer-SSR
+			</div>
+			<div class = "subtitleText">
+				Please complete details below:
+			</div>
+			
+			<div class="form-style-5">
+				<form id="my_form" action="http://localhost:7003/soa/uottawa/kmerssr" target="_blank" method="get">
+					<fieldset>
+						<legend><span class="number">0</span>Session ID</legend>
+						<input type="text" name="usersession" id="usrsession" value="---" readonly>
+						<legend><span class="number">1</span>DNA Sequence</legend>
+						<textarea name="dna" placeholder="Enter DNA Sequence" required="required"></textarea>
+						<legend><span class="number">2</span> SSR Search Filter</legend>
+						<input name="minsearch" type="number" min="2" step="1" placeholder="Enter Min Search Period" required="required">
+						<input name="maxsearch" type="number" min="3" step="1" placeholder="Enter Max Search Period" required="required"> 
+						<input name="minrepeat" type="number" min="1" step="1" placeholder="Enter Min Repeats" required="required"> 
+					</fieldset>
+					<fieldset>
+						<legend><span class="number">3</span> Additional Info</legend>
+						<input type="text" name="name" placeholder="Your Name" required="required">
+						<input type="email" name="email" placeholder="Your Email" required="required">
+					</fieldset>
+						<input type="submit" value="Submit" />
+				</form>
+			</div>
+					
+		</div>
+		
+	</body>
+	<script type="text/javascript" onload="checkCookie()" src="../js/script.js"></script>
+</html>

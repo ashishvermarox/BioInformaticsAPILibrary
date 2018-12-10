@@ -1,0 +1,38 @@
+<html>
+
+	<head>
+		<link rel="stylesheet" type="text/css" href="../css/Style.css">
+		<title>Result Search :: BioInformatics API Library || University of Ottawa</title>
+	</head>
+
+	<body>
+		<div class="maincontainer">
+			<div class ="heading">
+				Result Search
+			</div>
+			<div class = "subtitleText">
+				Please complete details below:
+			</div>
+			
+			<div class="form-style-5">
+				<form id="my_form" action="http://localhost:7003/soa/uottawa/resultprocessing" target="_blank" method="get">
+					<fieldset>
+						<legend><span class="number">1</span>Session ID</legend>
+						<input type="text" name="usersession" id="usrsession" placeholder="Enter Session ID">
+						<legend><span class="number">2</span>Result Status</legend>
+						<select id="job" name="status">
+							<optgroup label="Status">
+								<option value="complete" selected="selected">Completed</option>
+								<option value="processing">Processing</option>
+								<option value="both">Both</option>	
+							</optgroup>
+						</select>
+					</fieldset>	
+						<input type="submit" value="Submit" />
+				</form>
+			</div>
+					
+		</div>
+		
+	</body>
+</html>
