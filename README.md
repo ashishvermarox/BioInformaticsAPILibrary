@@ -1,2 +1,2 @@
 # BioInformaticsAPILibrary
-Library to host Bioinformatics APIs 
+This project aims to provide a reusable environment with the use of service-oriented architecture. To better put environment to use, a known algorithm Kmer-SSR which finds tandem repeats within DNA sequence is deployed. This algorithm is deployed as an API/Web-service which can be used as a web interface. The use of this project extends to develop more webservices and deploy on same environment, which would further help students and researchers to scale their research or application development in the real world.
